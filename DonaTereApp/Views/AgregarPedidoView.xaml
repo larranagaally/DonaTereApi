@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="PROYECTOFINAL_API.Views.AgregarPedido">
+    <ScrollView>
+        <VerticalStackLayout Spacing="0" Padding="0,0,0,10">
+
+            <Label Text="Nuevo pedido" FontSize="26" Style="{StaticResource Titulo}" Margin="0,0,0,15" />
+
+            <Label Style="{StaticResource Etiqueta}" Text="Cliente:" />
+            <Picker ItemsSource="{Binding Clientes}" ItemDisplayBinding="{Binding Nombre}"
+                    SelectedItem="{Binding ClienteSeleccionado}" Title="Seleccione el cliente" Margin="0,0,0,12" />
+
+            <Label Style="{StaticResource Etiqueta}" Text="Fecha de entrega (desde mañana):" />
+            <DatePicker Date="{Binding Pedido.FechaEntrega}" MinimumDate="{Binding FechaMinima}"
+                        Format="dd/MM/yyyy" Margin="0,0,0,12" />
+
+            <Label Style="{StaticResource Etiqueta}" Text="Estado del pago:" />
+            <Picker ItemsSource="{Binding OpcionesPago}" SelectedItem="{Binding Pedido.EstadoPago}" Margin="0,0,0,12" />
+
+            <Label Style="{StaticResource Etiqueta}" Text="Forma de pago:" />
+            <Picker ItemsSource="{Binding OpcionesMetodo}" SelectedItem="{Binding Pedido.MetodoPago}" Margin="0,0,0,15" />
+
+            <Border Style="{StaticResource Tarjeta}">     
+                <VerticalStackLayout Spacing="10">
+                    <Label Text="Productos disponibles hoy" Style="{StaticResource Subtitulo}" FontSize="16" />
+
+                    <VerticalStackLayout BindableLayout.ItemsSource="{Binding Lineas}" Spacing="10">
+                        <BindableLayout.ItemTemplate>
+                            <DataTemplate>
+                                <Grid ColumnDefinitions="*,Auto" ColumnSpacing="8">
+                                    <VerticalStackLayout Spacing="0" VerticalOptions="Center">
+                                        <Label Text="{Binding Producto.Nombre}" FontFamily="OpenSansSemibold" FontSize="15" TextColor="#212121" />
+                                        <Label Text="{Binding Producto.Precio, StringFormat='{0:C}'}" Style="{StaticResource Texto}" FontSize="13" />
+                                    </VerticalStackLayout>
+
+                                    <HorizontalStackLayout Grid.Column="1" Spacing="6" VerticalOptions="Center">
+                                        <Button Text="-" Command="{Binding MenosCommand}" Style="{StaticResource BotonOscuro}"
+                                                WidthRequest="40" HeightRequest="40" CornerRadius="20" FontSize="18" Padding="0" />
+                                        <Label Text="{Binding Cantidad}" FontSize="17" FontFamily="OpenSansSemibold"
+                                               WidthRequest="30" HorizontalTextAlignment="Center" VerticalOptions="Center" TextColor="#212121" />
+                                        <Button Text="+" Command="{Binding MasCommand}" Style="{StaticResource BotonPrimario}"
+                                                WidthRequest="40" HeightRequest="40" CornerRadius="20" FontSize="18" Padding="0" />
+                                    </HorizontalStackLayout>
+                                </Grid>
+                            </DataTemplate>
+                        </BindableLayout.ItemTemplate>
+                    </VerticalStackLayout>
+                </VerticalStackLayout>
+            </Border>
+
+            <Label Style="{StaticResource Error}" Text="{Binding Mensaje}" Margin="0,15,0,5" />
+            <Label Text="{Binding Total, StringFormat='Total del pedido: {0:C}'}"
+                   FontSize="20" FontFamily="OpenSansSemibold" TextColor="#39765B" Margin="0,0,0,12" />
+
+            <FlexLayout Wrap="Wrap" JustifyContent="Start">
+                <Button Text="Guardar" Command="{Binding GuardarCommand}" Style="{StaticResource BotonPrimario}"
+                        WidthRequest="150" Margin="0,0,10,10" />
+                <Button Text="Cancelar" Command="{Binding VerPedidosCommand}" Style="{StaticResource BotonOscuro}"
+                        WidthRequest="150" Margin="0,0,10,10" />
+            </FlexLayout>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentView>

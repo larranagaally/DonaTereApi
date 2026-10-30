@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="PROYECTOFINAL_API.Views.AgregarProductos">
+    <ScrollView>
+        <VerticalStackLayout Padding="25" MaximumWidthRequest="500" HorizontalOptions="Start" Spacing="0">
+
+            <Label Text="{Binding Titulo}" FontSize="26" Style="{StaticResource Titulo}" Margin="0,0,0,25" />
+
+            <Label Style="{StaticResource Etiqueta}" Text="Nombre del producto:" />
+            <Entry Style="{StaticResource CampoTexto}" Text="{Binding Producto.Nombre}" Margin="0,5,0,15" />
+
+            <Label Style="{StaticResource Etiqueta}" Text="Precio:" />
+            <Entry Style="{StaticResource CampoTexto}" Text="{Binding Precio}" Keyboard="Numeric" Margin="0,5,0,15" />
+
+            <Label Style="{StaticResource Etiqueta}" Text="Categoría:" />
+            <Picker ItemsSource="{Binding Categorias}" ItemDisplayBinding="{Binding Nombre}"
+                    SelectedItem="{Binding CategoriaSeleccionada}" Title="Seleccione la categoría"
+                    Margin="0,5,0,15" />
+
+            <HorizontalStackLayout Spacing="10" Margin="0,0,0,10">
+                <CheckBox IsChecked="{Binding Producto.Activo}" Color="#39765B" VerticalOptions="Center" />
+                <Label Style="{StaticResource Etiqueta}" Text="En catálogo (se puede vender)" FontSize="15" VerticalOptions="Center" />
+            </HorizontalStackLayout>
+
+            <HorizontalStackLayout Spacing="10" Margin="0,0,0,20">
+                <CheckBox IsChecked="{Binding Producto.Disponible}" Color="#39765B" VerticalOptions="Center" />
+                <Label Style="{StaticResource Etiqueta}" Text="Disponible hoy" FontSize="15" VerticalOptions="Center" />
+            </HorizontalStackLayout>
+
+            <Label Style="{StaticResource Error}" Text="{Binding Mensaje}" Margin="0,0,0,10" />
+
+            <HorizontalStackLayout Spacing="10">
+                <Button Text="Guardar" Command="{Binding GuardarCommand}" Style="{StaticResource BotonPrimario}" WidthRequest="150" />
+                <Button Text="Cancelar" Command="{Binding VerProductosCommand}" Style="{StaticResource BotonOscuro}" WidthRequest="150" />
+            </HorizontalStackLayout>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentView>

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="PROYECTOFINAL_API.Views.PedidosView">
+    <Grid RowDefinitions="Auto,Auto,Auto,*,Auto">
+
+        <Label Style="{StaticResource Titulo}" Text="Pedidos" />
+
+        <Label Grid.Row="1" Style="{StaticResource Texto}" Margin="0,5,0,0"
+               Text="Seleccione un pedido para editarlo, registrar su pago, marcarlo como entregado o eliminarlo." />
+
+        <Button Grid.Row="2" Text="+ Nuevo pedido" Command="{Binding AgregarPedidoCommand}"
+                Style="{StaticResource BotonPrimario}" WidthRequest="170"
+                HorizontalOptions="End" Margin="0,15" />
+
+        <CollectionView Grid.Row="3" ItemsSource="{Binding Pedidos}"
+                        SelectionMode="Single" SelectedItem="{Binding PedidoSeleccionado}"
+                        Margin="0,0,0,10">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Border Style="{StaticResource Tarjeta}" Margin="0,0,0,8" Padding="14">
+                        <Border.Triggers>
+                            <DataTrigger TargetType="Border" Binding="{Binding Estado}" Value="Cancelado">
+                                <Setter Property="Opacity" Value="0.55" />
+                            </DataTrigger>
+                        </Border.Triggers>
+                        <VerticalStackLayout Spacing="3">
+                            <Label Text="{Binding Id, StringFormat='Pedido #{0}'}" FontFamily="OpenSansSemibold" FontSize="16" TextColor="#285440" />
+                            <Label Text="{Binding NombreCliente}" FontFamily="OpenSansSemibold" FontSize="15" TextColor="#212121" />
+                            <Label Text="{Binding FechaEntrega, StringFormat='Entrega: {0:dd/MM/yyyy}'}" Style="{StaticResource Texto}" />
+                            <Label Text="{Binding ResumenProductos}" Style="{StaticResource Texto}" />
+                            <Label Text="{Binding Total, StringFormat='Total: {0:C}'}" FontSize="15" TextColor="#212121" />
+                            <Label Text="{Binding PagoTexto, StringFormat='Pago: {0}'}" Style="{StaticResource Texto}" />
+                            <Label Text="{Binding Estado, StringFormat='Estado: {0}'}" Style="{StaticResource Texto}" />
+                        </VerticalStackLayout>
+                    </Border>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+        <VerticalStackLayout Grid.Row="4" Spacing="8">
+            <Label Style="{StaticResource Error}" Text="{Binding Mensaje}" />
+
+            <FlexLayout Wrap="Wrap" Direction="Row" AlignItems="Center">
+                <Button Text="Editar pedido" Command="{Binding EditarCommand}"
+                        Style="{StaticResource BotonOscuro}" WidthRequest="150" Margin="0,0,10,8" />
+                <Button Text="Pagó en efectivo" Command="{Binding PagarEfectivoCommand}"
+                        Style="{StaticResource BotonPrimario}" WidthRequest="160" Margin="0,0,10,8" />
+                <Button Text="Pagó por transferencia" Command="{Binding PagarTransferenciaCommand}"
+                        Style="{StaticResource BotonPrimario}" WidthRequest="180" Margin="0,0,10,8" />
+                <Button Text="Marcar como entregado" Command="{Binding EntregadoCommand}"
+                        Style="{StaticResource BotonOscuro}" WidthRequest="180" Margin="0,0,10,8" />
+                <Button Text="Eliminar pedido" Command="{Binding CancelarCommand}"
+                        Style="{StaticResource BotonPeligro}" WidthRequest="150" Margin="0,0,10,8" />
+            </FlexLayout>
+        </VerticalStackLayout>
+
+    </Grid>
+</ContentView>

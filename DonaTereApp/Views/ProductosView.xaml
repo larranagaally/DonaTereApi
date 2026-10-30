@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="PROYECTOFINAL_API.Views.ProductosView">
+
+    <Grid RowDefinitions="Auto,Auto,Auto,Auto,*">
+
+        <Label Text="Productos" Style="{StaticResource Titulo}" />
+
+        <Label Grid.Row="1" Style="{StaticResource Texto}" Margin="0,5,0,8"
+               Text="Marcar como disponible hoy en los productos que puedes preparar. Los productos no disponibles no se pueden agregar a pedidos." />
+
+        <Button Grid.Row="2" Text="+ Nuevo producto" Command="{Binding AgregarProductoCommand}" 
+                Style="{StaticResource BotonPrimario}" WidthRequest="170" 
+                HorizontalOptions="End" Margin="0,8,0,12" />
+
+        <Label Grid.Row="3" Style="{StaticResource Error}" Text="{Binding Mensaje}" Margin="0,0,0,8" />
+
+        <!-- Única versión responsiva para PC y Móvil -->
+        <CollectionView Grid.Row="4" ItemsSource="{Binding Grupos}" IsGrouped="True" SelectionMode="None">
+
+            <CollectionView.GroupHeaderTemplate>
+                <DataTemplate>
+                    <Label Text="{Binding Nombre}" FontSize="16" FontFamily="OpenSansSemibold" TextColor="#285440" Margin="2,10,2,4" />
+                </DataTemplate>
+            </CollectionView.GroupHeaderTemplate>
+
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Border BackgroundColor="White" Stroke="#DCE6DE" StrokeThickness="1" Padding="12,10" Margin="0,0,0,8">
+
+                        
+                        <Grid RowDefinitions="Auto, Auto" RowSpacing="6">
+
+                          
+                            <Grid ColumnDefinitions="*, Auto" ColumnSpacing="8">
+                                <Label Text="{Binding Nombre}" FontSize="15" FontFamily="OpenSansSemibold" TextColor="#285440" 
+                                       VerticalOptions="Center" LineBreakMode="TailTruncation" />
+
+                                <Label Grid.Column="1" Text="{Binding Precio, StringFormat='{0:C}'}" FontSize="15" FontFamily="OpenSansSemibold" 
+                                       TextColor="#285440" VerticalOptions="Center" />
+                            </Grid>
+
+                          
+                            <Grid Grid.Row="1" ColumnDefinitions="*, Auto" VerticalOptions="Center">
+
+                             
+                                <HorizontalStackLayout Spacing="8" VerticalOptions="Center">
+                                    <HorizontalStackLayout Spacing="2">
+                                        <CheckBox IsChecked="{Binding Activo}" VerticalOptions="Center" MinimumWidthRequest="28" />
+                                        <Label Text="En catálogo" FontSize="12" TextColor="#374151" VerticalOptions="Center" />
+                                    </HorizontalStackLayout>
+
+                                    <HorizontalStackLayout Spacing="2">
+                                        <CheckBox IsChecked="{Binding Disponible}" VerticalOptions="Center" MinimumWidthRequest="28" />
+                                        <Label Text="Disponible" FontSize="12" TextColor="#374151" VerticalOptions="Center" />
+                                    </HorizontalStackLayout>
+                                </HorizontalStackLayout>
+
+                                
+                                <HorizontalStackLayout Grid.Column="1" Spacing="8" VerticalOptions="Center">
+                                    <Button ImageSource="update.png" Style="{StaticResource BotonOscuro}" HeightRequest="34" WidthRequest="34" Padding="6"
+                                            Command="{Binding Path=BindingContext.EditarCommand, Source={RelativeSource AncestorType={x:Type ContentView}}}" CommandParameter="{Binding}" />
+
+                                    <Button ImageSource="delete.png" Style="{StaticResource BotonPeligro}" HeightRequest="34" WidthRequest="34" Padding="6"
+                                            Command="{Binding Path=BindingContext.EliminarCommand, Source={RelativeSource AncestorType={x:Type ContentView}}}" CommandParameter="{Binding}" />
+                                </HorizontalStackLayout>
+
+                            </Grid>
+
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+    </Grid>
+</ContentView>

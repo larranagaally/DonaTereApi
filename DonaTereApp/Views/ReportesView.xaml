@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="PROYECTOFINAL_API.Views.ReportesView">
+    <Grid RowDefinitions="Auto,Auto,*">
+
+        <Label Style="{StaticResource Titulo}" Text="Reportes" />
+
+        <FlexLayout Grid.Row="1" Wrap="Wrap" Margin="0,15">
+            <Button Text="Qué cocinar" Command="{Binding VerQueCocinarCommand}" Style="{StaticResource BotonPrimario}" Margin="0,0,8,8" />
+            <Button Text="Productos más pedidos" Command="{Binding VerMasPedidosCommand}" Style="{StaticResource BotonPrimario}" Margin="0,0,8,8" />
+            <Button Text="Ventas del mes" Command="{Binding VerVentasMesCommand}" Style="{StaticResource BotonPrimario}" Margin="0,0,8,8" />
+        </FlexLayout>
+
+        <ScrollView Grid.Row="2">
+            <Grid>
+
+                <VerticalStackLayout Spacing="15" IsVisible="{Binding EsQueCocinar}">
+                    <HorizontalStackLayout Spacing="10">
+                        <Label Style="{StaticResource Etiqueta}" Text="Fecha de entrega:" VerticalOptions="Center" />
+                        <DatePicker Date="{Binding FechaCocina}" Format="dd/MM/yyyy" WidthRequest="180" />
+                    </HorizontalStackLayout>
+
+                    <VerticalStackLayout Spacing="12">
+                        <Label Style="{StaticResource Subtitulo}" Text="Pedidos del día" />
+                        <Label Style="{StaticResource Subtitulo}" Text="Piezas a preparar" />
+
+                        <Border Style="{StaticResource Tarjeta}" VerticalOptions="Start">
+                            <VerticalStackLayout BindableLayout.ItemsSource="{Binding PedidosDelDia}" Spacing="10">
+                                <BindableLayout.ItemTemplate>
+                                    <DataTemplate>
+                                        <VerticalStackLayout Spacing="2">
+                                            <Label Text="{Binding NombreCliente}" FontFamily="OpenSansSemibold" TextColor="#212121" />
+                                            <Label Text="{Binding ResumenProductos}" Style="{StaticResource Texto}" />
+                                            <Label Text="{Binding PagoTexto, StringFormat='Pago: {0}'}" Style="{StaticResource Texto}" FontSize="13" />
+                                        </VerticalStackLayout>
+                                    </DataTemplate>
+                                </BindableLayout.ItemTemplate>
+                            </VerticalStackLayout>
+                        </Border>
+
+                        <Border Style="{StaticResource Tarjeta}" VerticalOptions="Start">
+                            <VerticalStackLayout BindableLayout.ItemsSource="{Binding ProduccionDelDia}" Spacing="10">
+                                <BindableLayout.ItemTemplate>
+                                    <DataTemplate>
+                                        <Grid ColumnDefinitions="*,Auto" ColumnSpacing="8">
+                                            <Label Text="{Binding NombreProducto}" TextColor="#212121" />
+                                            <Label Grid.Column="1" Text="{Binding Piezas}" FontFamily="OpenSansSemibold" TextColor="#39765B" />
+                                        </Grid>
+                                    </DataTemplate>
+                                </BindableLayout.ItemTemplate>
+                            </VerticalStackLayout>
+                        </Border>
+                    </VerticalStackLayout>
+                </VerticalStackLayout>
+
+                <Border Style="{StaticResource Tarjeta}" IsVisible="{Binding EsMasPedidos}" VerticalOptions="Start">
+                    <VerticalStackLayout BindableLayout.ItemsSource="{Binding ProductosMasPedidos}" Spacing="10">
+                        <BindableLayout.ItemTemplate>
+                            <DataTemplate>
+                                <Grid ColumnDefinitions="*,Auto,Auto" ColumnSpacing="8">
+                                    <Label Text="{Binding NombreProducto}" TextColor="#212121" />
+                                    <Label Grid.Column="1" Text="{Binding Piezas, StringFormat='{0} pzas'}" TextColor="#66736A" Margin="0,0,10,0" />
+                                    <Label Grid.Column="2" Text="{Binding Ingreso, StringFormat='{0:C}'}" FontFamily="OpenSansSemibold" TextColor="#39765B" HorizontalTextAlignment="End" />
+                                </Grid>
+                            </DataTemplate>
+                        </BindableLayout.ItemTemplate>
+                    </VerticalStackLayout>
+                </Border>
+
+                <VerticalStackLayout Spacing="20" IsVisible="{Binding EsVentasMes}">
+                    <FlexLayout Wrap="Wrap" JustifyContent="SpaceBetween" AlignItems="Center" Direction="Row">
+                        <Button Text="← Mes anterior" Command="{Binding MesAnteriorCommand}" Style="{StaticResource BotonOscuro}" />
+                        <Label Text="{Binding MesTexto}" Style="{StaticResource Subtitulo}"
+                               HorizontalOptions="Center" VerticalOptions="Center" />
+                        <Button Text="Mes siguiente →" Command="{Binding MesSiguienteCommand}" Style="{StaticResource BotonOscuro}" />
+                    </FlexLayout>
+
+                    <Grid ColumnDefinitions="*,*" RowDefinitions="Auto,Auto" ColumnSpacing="16" RowSpacing="16">
+                        <Border Style="{StaticResource Tarjeta}" BackgroundColor="#F5F7F5">
+                            <VerticalStackLayout Spacing="8">
+                                <Label Style="{StaticResource Texto}" Text="Total con entrega en el mes" />
+                                <Label Style="{StaticResource Cifra}" Text="{Binding VentasMes, StringFormat='{0:C}'}" />
+                            </VerticalStackLayout>
+                        </Border>
+                        <Border Grid.Column="1" Style="{StaticResource Tarjeta}" BackgroundColor="#F5F7F5">
+                            <VerticalStackLayout Spacing="8">
+                                <Label Style="{StaticResource Texto}" Text="Cobrado" />
+                                <Label Style="{StaticResource Cifra}" Text="{Binding CobradoMes, StringFormat='{0:C}'}" />
+                            </VerticalStackLayout>
+                        </Border>
+                        <Border Grid.Row="1" Style="{StaticResource Tarjeta}" BackgroundColor="#F5F7F5">
+                            <VerticalStackLayout Spacing="8">
+                                <Label Style="{StaticResource Texto}" Text="Por cobrar" />
+                                <Label Style="{StaticResource Cifra}" TextColor="#B5561F" Text="{Binding PorCobrarMes, StringFormat='{0:C}'}" />
+                            </VerticalStackLayout>
+                        </Border>
+                        <Border Grid.Row="1" Grid.Column="1" Style="{StaticResource Tarjeta}" BackgroundColor="#F5F7F5">
+                            <VerticalStackLayout Spacing="8">
+                                <Label Style="{StaticResource Texto}" Text="Número de pedidos" />
+                                <Label Style="{StaticResource Cifra}" Text="{Binding NumeroPedidosMes}" />
+                            </VerticalStackLayout>
+                        </Border>
+                    </Grid>
+                </VerticalStackLayout>
+
+            </Grid>
+        </ScrollView>
+
+    </Grid>
+</ContentView>

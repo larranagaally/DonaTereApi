@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="PROYECTOFINAL_API.Views.CategoriaFormView">
+    <ScrollView>
+        <VerticalStackLayout Padding="25" MaximumWidthRequest="500" HorizontalOptions="Start" Spacing="0">
+
+            <Label Text="{Binding Titulo}" FontSize="26" Style="{StaticResource Titulo}" Margin="0,0,0,25" />
+
+            <Label Style="{StaticResource Etiqueta}" Text="Nombre de la categoría:" />
+            <Entry Style="{StaticResource CampoTexto}" Text="{Binding Categoria.Nombre}" Margin="0,5,0,15" />
+
+            <Label Style="{StaticResource Error}" Text="{Binding Mensaje}" Margin="0,0,0,10" />
+
+            <HorizontalStackLayout Spacing="10" HorizontalOptions="Center">
+                <Button Text="Guardar" Command="{Binding GuardarCommand}" Style="{StaticResource BotonPrimario}" WidthRequest="150" />
+                <Button Text="Cancelar" Command="{Binding VerCategoriasCommand}" Style="{StaticResource BotonOscuro}" WidthRequest="150" />
+            </HorizontalStackLayout>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentView>

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             x:Class="PROYECTOFINAL_API.Views.CategoriasView">
+
+    <Grid RowDefinitions="Auto,Auto,Auto,*">
+
+        <Label Style="{StaticResource Titulo}" Text="Categorías" />
+
+        <Label Grid.Row="1" Style="{StaticResource Texto}" Margin="0,5,0,0"
+               Text="Las categorías dadas de baja dejan de ofrecerse, pero sus productos conservan su categoría." />
+
+        <Button Grid.Row="2" Text="+ Nueva categoría" Command="{Binding NuevoCommand}"
+                Style="{StaticResource BotonPrimario}" WidthRequest="190"
+                HorizontalOptions="End" Margin="0,15" />
+
+        <ScrollView Grid.Row="3">
+            <VerticalStackLayout Spacing="10">
+
+                <Label Style="{StaticResource Error}" Text="{Binding Mensaje}" />
+
+                <VerticalStackLayout BindableLayout.ItemsSource="{Binding Categorias}" Spacing="10">
+                    <BindableLayout.ItemTemplate>
+                        <DataTemplate>
+                            <Border Style="{StaticResource Tarjeta}" Padding="12">
+                                <Grid ColumnDefinitions="*,Auto" ColumnSpacing="12">
+
+                                    <Label Text="{Binding Nombre}" FontSize="17" FontFamily="OpenSansSemibold"
+                                           TextColor="#285440" VerticalOptions="Center" />
+
+                             
+                                    <HorizontalStackLayout Grid.Column="1" Spacing="8" VerticalOptions="Center" HorizontalOptions="End">
+
+                                        <Button ImageSource="update.png" 
+                                                Style="{StaticResource BotonOscuro}" 
+                                                HeightRequest="36" WidthRequest="36" Padding="8"
+                                                Command="{Binding Path=BindingContext.EditarCommand, Source={RelativeSource AncestorType={x:Type ContentView}}}"
+                                                CommandParameter="{Binding}" />
+
+                                        <Button ImageSource="delete.png" 
+                                                Style="{StaticResource BotonPeligro}" 
+                                                HeightRequest="36" WidthRequest="36" Padding="8"
+                                                Command="{Binding Path=BindingContext.EliminarCommand, Source={RelativeSource AncestorType={x:Type ContentView}}}"
+                                                CommandParameter="{Binding}" />
+
+                                    </HorizontalStackLayout>
+
+                                </Grid>
+                            </Border>
+                        </DataTemplate>
+                    </BindableLayout.ItemTemplate>
+                </VerticalStackLayout>
+
+            </VerticalStackLayout>
+        </ScrollView>
+
+    </Grid>
+</ContentView>

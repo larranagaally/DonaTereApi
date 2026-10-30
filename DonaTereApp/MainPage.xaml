@@ -1,0 +1,350 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:PROYECTOFINAL_API.ViewModels"
+             xmlns:views="clr-namespace:PROYECTOFINAL_API.Views"
+             x:Class="DonaTereApp.MainPage"
+             BackgroundColor="#F5F7F5">
+
+    <ContentPage.BindingContext>
+        <vm:MainViewModel />
+    </ContentPage.BindingContext>
+
+    <Grid RowDefinitions="{OnIdiom Phone='Auto,*', Default='Auto,*'}"
+          ColumnSpacing="0"
+          RowSpacing="0">
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="{OnIdiom Phone='*', Default=220}" />
+            <ColumnDefinition Width="{OnIdiom Phone=0, Default='*'}" />
+        </Grid.ColumnDefinitions>
+
+       
+        <Border Grid.Row="0"
+        Grid.Column="0"
+        Grid.ColumnSpan="2"
+        BackgroundColor="#285440"
+        Stroke="Transparent"
+        Padding="0,10"
+        IsVisible="{Binding EsCelular}">
+
+            <ScrollView Orientation="Horizontal"
+                HorizontalScrollBarVisibility="Never"
+                VerticalScrollBarVisibility="Never">
+
+                <HorizontalStackLayout Spacing="16"
+                               Padding="12,4"
+                               HorizontalOptions="Center"
+                               VerticalOptions="Center">
+
+                    <ImageButton Source="home.png"
+                         WidthRequest="45"
+                         HeightRequest="45"
+                         Padding="8"
+                         Aspect="AspectFit"
+                         BackgroundColor="Transparent"
+                         Command="{Binding InicioCommand}" />
+
+                    <ImageButton Source="food.png"
+                         WidthRequest="45"
+                         HeightRequest="45"
+                         Padding="8"
+                         Aspect="AspectFit"
+                         BackgroundColor="Transparent"
+                         Command="{Binding ProductosCommand}" />
+
+                    <ImageButton Source="cart.png"
+                         WidthRequest="45"
+                         HeightRequest="45"
+                         Padding="8"
+                         Aspect="AspectFit"
+                         BackgroundColor="Transparent"
+                         Command="{Binding PedidosCommand}" />
+
+                    <ImageButton Source="user.png"
+                         WidthRequest="45"
+                         HeightRequest="45"
+                         Padding="8"
+                         Aspect="AspectFit"
+                         BackgroundColor="Transparent"
+                         Command="{Binding ClientesCommand}" />
+
+                    <ImageButton Source="cat.png"
+                         WidthRequest="45"
+                         HeightRequest="45"
+                         Padding="8"
+                         Aspect="AspectFit"
+                         BackgroundColor="Transparent"
+                         Command="{Binding CategoriasCommand}" />
+
+                    <ImageButton Source="stats.png"
+                         WidthRequest="45"
+                         HeightRequest="45"
+                         Padding="8"
+                         Aspect="AspectFit"
+                         BackgroundColor="Transparent"
+                         Command="{Binding ReportesCommand}" />
+
+                </HorizontalStackLayout>
+            </ScrollView>
+        </Border>
+
+
+        <Border Grid.Row="0"
+                Grid.RowSpan="2"
+                Grid.Column="0"
+                WidthRequest="220"
+                BackgroundColor="#285440"
+                Stroke="Transparent"
+                Padding="12"
+                IsVisible="{Binding EsEscritorio}">
+
+            <ScrollView VerticalScrollBarVisibility="Never">
+                <VerticalStackLayout Spacing="10">
+
+                    <VerticalStackLayout Margin="5,15,5,25"
+                                         Spacing="5">
+
+                        <Label Text="DOÑA TERE"
+                               FontSize="25"
+                               FontFamily="OpenSansSemibold"
+                               TextColor="White" />
+
+                        <Label Text="Gestión del negocio"
+                               FontSize="13"
+                               TextColor="#D7E8DD" />
+
+                        <BoxView HeightRequest="1"
+                                 Color="#D7E8DD"
+                                 Margin="0,10,0,10" />
+                    </VerticalStackLayout>
+
+                    <Grid ColumnDefinitions="35,*"
+                          HeightRequest="48">
+
+                        <Image Source="home.png"
+                               WidthRequest="20"
+                               HeightRequest="20"
+                               VerticalOptions="Center"
+                               HorizontalOptions="Center" />
+
+                        <Label Grid.Column="1"
+                               Text="Inicio"
+                               FontSize="15"
+                               TextColor="White"
+                               VerticalTextAlignment="Center"
+                               Margin="8,0,0,0" />
+
+                        <Button Grid.ColumnSpan="2"
+                                Command="{Binding InicioCommand}"
+                                BackgroundColor="Transparent"
+                                Text=""
+                                Padding="0" />
+                    </Grid>
+
+                    <Grid ColumnDefinitions="35,*"
+                          HeightRequest="48">
+
+                        <Image Source="food.png"
+                               WidthRequest="20"
+                               HeightRequest="20"
+                               VerticalOptions="Center"
+                               HorizontalOptions="Center" />
+
+                        <Label Grid.Column="1"
+                               Text="Productos"
+                               FontSize="15"
+                               TextColor="White"
+                               VerticalTextAlignment="Center"
+                               Margin="8,0,0,0" />
+
+                        <Button Grid.ColumnSpan="2"
+                                Command="{Binding ProductosCommand}"
+                                BackgroundColor="Transparent"
+                                Text=""
+                                Padding="0" />
+                    </Grid>
+
+                    <Grid ColumnDefinitions="35,*"
+                          HeightRequest="48">
+
+                        <Image Source="cart.png"
+                               WidthRequest="20"
+                               HeightRequest="20"
+                               VerticalOptions="Center"
+                               HorizontalOptions="Center" />
+
+                        <Label Grid.Column="1"
+                               Text="Pedidos"
+                               FontSize="15"
+                               TextColor="White"
+                               VerticalTextAlignment="Center"
+                               Margin="8,0,0,0" />
+
+                        <Button Grid.ColumnSpan="2"
+                                Command="{Binding PedidosCommand}"
+                                BackgroundColor="Transparent"
+                                Text=""
+                                Padding="0" />
+                    </Grid>
+
+                    <Grid ColumnDefinitions="35,*"
+                          HeightRequest="48">
+
+                        <Image Source="user.png"
+                               WidthRequest="20"
+                               HeightRequest="20"
+                               VerticalOptions="Center"
+                               HorizontalOptions="Center" />
+
+                        <Label Grid.Column="1"
+                               Text="Clientes"
+                               FontSize="15"
+                               TextColor="White"
+                               VerticalTextAlignment="Center"
+                               Margin="8,0,0,0" />
+
+                        <Button Grid.ColumnSpan="2"
+                                Command="{Binding ClientesCommand}"
+                                BackgroundColor="Transparent"
+                                Text=""
+                                Padding="0" />
+                    </Grid>
+
+                    <Grid ColumnDefinitions="35,*"
+                          HeightRequest="48">
+
+                        <Image Source="cat.png"
+                               WidthRequest="20"
+                               HeightRequest="20"
+                               VerticalOptions="Center"
+                               HorizontalOptions="Center" />
+
+                        <Label Grid.Column="1"
+                               Text="Categorías"
+                               FontSize="15"
+                               TextColor="White"
+                               VerticalTextAlignment="Center"
+                               Margin="8,0,0,0" />
+
+                        <Button Grid.ColumnSpan="2"
+                                Command="{Binding CategoriasCommand}"
+                                BackgroundColor="Transparent"
+                                Text=""
+                                Padding="0" />
+                    </Grid>
+
+                    <Grid ColumnDefinitions="35,*"
+                          HeightRequest="48">
+
+                        <Image Source="stats.png"
+                               WidthRequest="20"
+                               HeightRequest="20"
+                               VerticalOptions="Center"
+                               HorizontalOptions="Center" />
+
+                        <Label Grid.Column="1"
+                               Text="Reportes"
+                               FontSize="15"
+                               TextColor="White"
+                               VerticalTextAlignment="Center"
+                               Margin="8,0,0,0" />
+
+                        <Button Grid.ColumnSpan="2"
+                                Command="{Binding ReportesCommand}"
+                                BackgroundColor="Transparent"
+                                Text=""
+                                Padding="0" />
+                    </Grid>
+
+                </VerticalStackLayout>
+            </ScrollView>
+        </Border>
+
+        <Border Grid.Row="1"
+                Grid.Column="{OnIdiom Phone=0, Default=1}"
+                Grid.ColumnSpan="{OnIdiom Phone=2, Default=1}"
+                BackgroundColor="#F5F7F5"
+                Stroke="Transparent"
+                Padding="{Binding PaddingContenido}"
+                HorizontalOptions="Fill"
+                VerticalOptions="Fill">
+
+            <Grid HorizontalOptions="Fill"
+                  VerticalOptions="Fill">
+
+                <Grid IsVisible="{Binding EsInicio}">
+                    <views:InicioView
+                        BindingContext="{Binding InicioVM}"
+                        HorizontalOptions="Fill"
+                        VerticalOptions="Fill" />
+                </Grid>
+
+                <Grid IsVisible="{Binding EsProductos}">
+                    <views:ProductosView
+                        BindingContext="{Binding ProductosVM}"
+                        HorizontalOptions="Fill"
+                        VerticalOptions="Fill" />
+                </Grid>
+
+                <Grid IsVisible="{Binding EsPedidos}">
+                    <views:PedidosView
+                        BindingContext="{Binding PedidosVM}"
+                        HorizontalOptions="Fill"
+                        VerticalOptions="Fill" />
+                </Grid>
+
+                <Grid IsVisible="{Binding EsClientes}">
+                    <views:ClientesView
+                        BindingContext="{Binding ClientesVM}"
+                        HorizontalOptions="Fill"
+                        VerticalOptions="Fill" />
+                </Grid>
+
+                <Grid IsVisible="{Binding EsCategorias}">
+                    <views:CategoriasView
+                        BindingContext="{Binding CategoriasVM}"
+                        HorizontalOptions="Fill"
+                        VerticalOptions="Fill" />
+                </Grid>
+
+                <Grid IsVisible="{Binding EsReportes}">
+                    <views:ReportesView
+                        BindingContext="{Binding ReportesVM}"
+                        HorizontalOptions="Fill"
+                        VerticalOptions="Fill" />
+                </Grid>
+
+                <Grid IsVisible="{Binding EsPedidoForm}">
+                    <views:AgregarPedido
+                        BindingContext="{Binding PedidoFormVM}"
+                        HorizontalOptions="Fill"
+                        VerticalOptions="Fill" />
+                </Grid>
+
+                <Grid IsVisible="{Binding EsClienteForm}">
+                    <views:AgregarCliente
+                        BindingContext="{Binding ClienteFormVM}"
+                        HorizontalOptions="Fill"
+                        VerticalOptions="Fill" />
+                </Grid>
+
+                <Grid IsVisible="{Binding EsProductoForm}">
+                    <views:AgregarProductos
+                        BindingContext="{Binding ProductoFormVM}"
+                        HorizontalOptions="Fill"
+                        VerticalOptions="Fill" />
+                </Grid>
+
+                <Grid IsVisible="{Binding EsCategoriaForm}">
+                    <views:CategoriaFormView
+                        BindingContext="{Binding CategoriaFormVM}"
+                        HorizontalOptions="Fill"
+                        VerticalOptions="Fill" />
+                </Grid>
+
+            </Grid>
+        </Border>
+
+    </Grid>
+</ContentPage>

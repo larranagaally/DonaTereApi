@@ -1,0 +1,5 @@
+<Solution>
+  <Project Path="DonaTereApp/DonaTereApp.csproj" Id="1679c981-0385-472d-aa49-6ff257a2d4d9" />
+  <Project Path="DonaTereApi/DonaTereApi.csproj" />
+  <Project Path="DonaTereCore/DonaTere.Core.csproj" Id="be460286-10c1-4d98-9b58-c7dcbe6daad5" />
+</Solution>
